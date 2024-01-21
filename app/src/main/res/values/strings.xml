@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">True Astrology</string>
+    <string name="pred_button_text">Generate Prediction</string>
+    <string name="fatalError">Fatal error</string>
+    <string name="warning">Warning</string>
+    <string name="zodiac_sign">Please Select your Zodiac Sign</string>
+</resources>

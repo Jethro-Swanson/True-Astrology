@@ -1,0 +1,83 @@
+Index: app/src/main/java/com/example/trueastrology/persistence/stubs/PredictionPersistenceStub.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/trueastrology/persistence/stubs/PredictionPersistenceStub.java b/app/src/main/java/com/example/trueastrology/persistence/stubs/PredictionPersistenceStub.java
+--- a/app/src/main/java/com/example/trueastrology/persistence/stubs/PredictionPersistenceStub.java	
++++ b/app/src/main/java/com/example/trueastrology/persistence/stubs/PredictionPersistenceStub.java	
+@@ -8,7 +8,7 @@
+ 
+ //implements a stub database for predictions
+ public class PredictionPersistenceStub implements PredictionPersistence {
+-    private ArrayList<Prediction> predictionList;//db stub
++    private final ArrayList<Prediction> predictionList;//db stub
+ 
+     //constructor
+     public PredictionPersistenceStub() {
+@@ -37,7 +37,7 @@
+                 "An eventful day for a# $. You’ll meet a Cancer and spend the rest of your life together! It’s inoperable and terminal. We’re sorry."));
+ 
+         predictionList.add(new Prediction(8,
+-                "sorry I can't help it I am a# $\" can get you out of some situations, " +
++                "'Sorry I can't help it I am a# $' can get you out of some situations, " +
+                         "but it won't save you from your upcoming life sentence. "));
+ 
+         predictionList.add(new Prediction(9,
+Index: app/src/main/java/com/example/trueastrology/logic/RetrievePrediction.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/trueastrology/logic/RetrievePrediction.java b/app/src/main/java/com/example/trueastrology/logic/RetrievePrediction.java
+--- a/app/src/main/java/com/example/trueastrology/logic/RetrievePrediction.java	
++++ b/app/src/main/java/com/example/trueastrology/logic/RetrievePrediction.java	
+@@ -9,21 +9,20 @@
+ //Retrieve Prediction from the database
+ public class RetrievePrediction {
+     //Get a random prediction from prediction list
+-    public static Prediction getRandPred(){
++    static Prediction getRandPred(){
+         ArrayList<Prediction> predictionList = Services.getPredictionPersistence().getPredictionList();
+         int index = (int)(Math.random() * predictionList.size());
+-
+         return predictionList.get(index);
+     }
+ 
+-    //helper method to replace prediction chars
+-    public static void getProcessedPred(Prediction pred, User user){
+-        pred= getRandPred();
+-        dynamizePrediction(pred, user);
++    //helper method to generate a dynamic prediction
++    public static String getDynamicPrediction(User user){
++        Prediction pred= getRandPred();
++        return dynamizePrediction(pred, user);
+     }
+ 
+     //helper method to make predictions dynamic
+-    public static void dynamizePrediction(Prediction pred, User user){
++    static String dynamizePrediction(Prediction pred, User user){
+         //replaces the key with the user's star sign
+         String predText = pred.getText().replace("$", user.getUserStarSign().getSignName());
+ 
+@@ -40,5 +39,6 @@
+                 }
+             }
+         }
++        return predText;
+     }
+ }
+Index: app/src/main/java/com/example/trueastrology/objects/Prediction.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/trueastrology/objects/Prediction.java b/app/src/main/java/com/example/trueastrology/objects/Prediction.java
+--- a/app/src/main/java/com/example/trueastrology/objects/Prediction.java	
++++ b/app/src/main/java/com/example/trueastrology/objects/Prediction.java	
+@@ -19,4 +19,5 @@
+     public String getText() {
+         return predictionText;
+     }
++
+ }
