@@ -9,6 +9,4 @@ Clone repository to local device and then build/run it using android studio on a
 
 [Vision statement](VISION.md)
 
-[Retrospective](RETROSPECTIVE.md)
-
 [Architecture](Architecture.md)
